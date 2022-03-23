@@ -1,4 +1,4 @@
-package com.backbase.interview.kalahgame.serverside.service;
+package com.backbase.interview.kalahgame.serverside.service.api;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 

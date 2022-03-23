@@ -1,6 +1,7 @@
 package com.backbase.interview.kalahgame.serverside.service;
 
 import com.backbase.interview.kalahgame.serverside.game.logic.KalahGameController;
+import com.backbase.interview.kalahgame.serverside.service.api.Response;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
@@ -24,8 +25,6 @@ public class KalahResourse {
     
     @Autowired(required = true)
     private KalahGameController gameController;
-    private SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "uri");
-    private FilterProvider filters = new SimpleFilterProvider().addFilter("customFilter", filter);
     
     @PostMapping("/games")
     public ResponseEntity<MappingJacksonValue> createGame() {
@@ -35,7 +34,11 @@ public class KalahResourse {
                           .fromCurrentRequest()
                           .path("/{id}")
                           .buildAndExpand(gameId).toUri();
-        
+    
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "uri");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("customFilter", filter);
+    
+    
         Response response = new Response(String.valueOf(gameId), uri.toString());
         MappingJacksonValue mapping = new MappingJacksonValue(response);
         mapping.setFilters(filters);
@@ -51,7 +54,13 @@ public class KalahResourse {
                           .fromCurrentContextPath().path("/games/{id}")
                           .buildAndExpand(gameId).toUri();
         Response response = new Response(String.valueOf(gameId),uri.toString(),status);
-        return ResponseEntity.ok().body(response);
+    
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id", "uri", "status");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("customFilter", filter);
+        MappingJacksonValue mapping = new MappingJacksonValue(response);
+        mapping.setFilters(filters);
+        
+        return ResponseEntity.ok().body(mapping);
     }
     
     

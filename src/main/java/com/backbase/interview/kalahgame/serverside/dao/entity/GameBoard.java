@@ -22,7 +22,6 @@ public class GameBoard {
     private List<Pit> pits = new ArrayList<>();
     @Autowired(required = true)
     private ObjectMapper objectMapper = new JsonMapper();
-    private Map<Integer,String> jsonMap ;
     
     public GameBoard () {
         pits.add(null);
@@ -38,7 +37,7 @@ public class GameBoard {
         
         
         try {
-            
+            Map<Integer,String> jsonMap;
             jsonMap = new HashMap<>();
             for (int i=1; i<pits.size(); i++) {
                 jsonMap.put(pits.get(i).getId(), String.valueOf(pits.get(i).getStoneBalance()));
