@@ -23,6 +23,9 @@ public class Response {
         this.uri = uri;
     }
     
+    public Response () {
+    }
+    
     public String getId () {
         return id;
     }

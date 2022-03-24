@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,8 +16,7 @@ import java.util.Map;
 
 public class GameBoard {
     
-    @Value("${primaryStonesNumber}")
-    private static int primaryStonesNumber = 6;
+    private static int primaryStonesNumber;
     private List<Pit> pits = new ArrayList<>();
     @Autowired(required = true)
     private ObjectMapper objectMapper = new JsonMapper();
