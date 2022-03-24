@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class GameBoard {
     
-    @Value("${primary.stones.number}")
+    @Value("${primaryStonesNumber}")
     private static int primaryStonesNumber = 6;
     private List<Pit> pits = new ArrayList<>();
     @Autowired(required = true)
